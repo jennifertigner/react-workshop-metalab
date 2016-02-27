@@ -472,7 +472,7 @@
     },
     "classnames": {
       "version": "2.2.3",
-      "from": "classnames@latest",
+      "from": "classnames@2.2.3",
       "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.2.3.tgz"
     },
     "cliui": {

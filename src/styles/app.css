@@ -1,9 +1,22 @@
 /* Base Application Styles */
+body {
+    background-color: turquoise;
+}
 
 .app {
-  color: #666;
+  color: green;
   max-width: 500px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin: 5%;
+  font-family: courier;
+}
+
+h1 {
+  text-decoration: underline;
+}
+
+h3 {
+  text-decoration: italic;
 }
 
 .todo-item {
