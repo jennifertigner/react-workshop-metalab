@@ -5,17 +5,23 @@ import TodoInput from './todo-input.js';
 
 export default React.createClass({
   getInitialState: function () {
-    return {
-      todos: [
-        {
-          task: "Learn React", 
-          done: true
-        }, 
-        {
-          task: "Fix my dishwasher", 
-          done: false
-        }
+    // When the page is loaded, this is loaded if the local storage is empty
+    var fallback = JSON.stringify(
+      [
+        { task: "Learn React",       done: true }, 
+        { task: "Fix my dishwasher", done: false }
       ]
+    );
+    return {
+      // when page is refreshed, it loads what's in the local storage
+      todos: JSON.parse(localStorage.getItem("todos") || fallback)
+    }
+  }, 
+  
+  // Keeps new items I've added in local storage, so it is still there when the page is refreshed
+  componentDidUpdate: function (prevProps, prevState) {
+    if (prevState.todos !== this.state.todos) {
+      localStorage.setItem("todos", JSON.stringify(this.state.todos));
     }
   }, 
   
@@ -32,11 +38,20 @@ export default React.createClass({
     this.setState({todos: todos});
   }, 
   
+  // Toggles whether the to-do item was completed
+  toggleTodo: function (index) {
+    var todos = this.state.todos;
+    todos[index].done = !todos[index].done;
+    this.setState({
+      todos: todos
+    });
+  },
+  
   render: function () {
     return (
       <div>
         <AppHeader title="Jenn's To-Do List" tagline="Note to self: don't be so lazy"/>
-        <TodoList todos={this.state.todos}/>
+        <TodoList onTodoClick={this.toggleTodo} todos={this.state.todos}/>
         <TodoInput onSubmit={this.addTodo}/>
       </div>
     );

@@ -9,7 +9,7 @@ export default React.createClass({
     }); 
     
     return(
-      <div className={classes}>
+      <div className={classes} onClick={this.props.onClick}>
         {this.props.task}
       </div>
     ); 
