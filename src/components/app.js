@@ -40,10 +40,14 @@ export default React.createClass({
   
   // Toggles whether the to-do item was completed
   toggleTodo: function (index) {
-    var todos = this.state.todos;
-    todos[index].done = !todos[index].done;
     this.setState({
-      todos: todos
+      todos: this.state.todos.map((el, id) => {
+        if (index === id) {
+          el.done = !el.done
+          return el
+        }
+        return el
+      })
     });
   },
   
